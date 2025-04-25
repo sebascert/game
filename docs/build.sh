@@ -6,9 +6,12 @@ docs_dir="$scrip_dir"
 output="$docs_dir/docs.pdf"
 metadata="$docs_dir/metadata.yaml"
 
-# the order in which sources are listed is the same as the rendering order
+# paths relative to docs_dir
+# the listed order is the same as the rendering order
 sources=(
     "portada.md"
+    "tematica.md"
+    "mecanicas.md"
 )
 
 for i in "${!sources[@]}"; do
