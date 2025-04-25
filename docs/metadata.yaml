@@ -1,0 +1,18 @@
+title: Game
+subtitle: Proyecto para construccion de software modulo de Videojuegos
+author:
+- name: Hannia Escamilla Pérez A01639113
+- name: Santiago Alonzo Aguilar A01639373
+- name: Diego Patricio Flores Reynoso A01645013
+- name: Sebastián Certuche A01644942
+- name: Esteban Camilo Muñoz Rosero A01644609
+
+lang: es
+
+mainfont: Arial
+fontsize: 12pt
+geometry: margin=1in
+
+toc: true
+toc-depth: 2
+numbersections: true
