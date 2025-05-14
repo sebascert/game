@@ -14,18 +14,20 @@ queda colapsada por los proyectiles y es difícil de ver.
 
 ### Vitalidad
 
-El jugador cuenta con un contador de "vida". Si este se reduce a 0 se pierde el
-juego. El contador tiene un valor maximo de 5, este reduce al recibir daño y se
-recupera tras completar un piso.
+El jugador cuenta con un contador de `vida`. Si este se reduce a 0 se pierde el
+juego. El contador tiene un valor maximo constante, este reduce al recibir daño
+y se recupera tras completar un piso. La vida se contabiliza en cantidades
+`enteras`.
 
 ### Movimiento
 
 El jugador puede moverse en direcciones cardinales (norte, sur, este, oeste) y
-diagonales. Además, se puede "esquivar" hacia una de estas direcciones
-volviéndose inmune a todo tipo de daño. No debe de ser utilizable todo el
-tiempo, es decir debe de tener un tiempo de espera hasta poder usarse otra vez.
-Tambien al final de este hay una pequeña fraccion de tiempo en la que el
-jugador no puede moverse a ninguna direccion pero si es capaz de tomar daño
+diagonales. Además, se puede realizar un `dash` hacia una de estas direcciones
+volviéndose inmune a todo tipo de daño mientras realiza un movimiento rapido.
+No debe de ser utilizable todo el tiempo, es decir debe de tener un `cooldown`
+hasta poder usarse otra vez. Tambien al final de este hay una pequeña fraccion
+de tiempo en la que el jugador no puede moverse a ninguna direccion pero si es
+capaz de tomar daño.
 
 ### PowerCast
 
@@ -35,9 +37,12 @@ durante un combate.
 #### ¿Cómo funciona?
 
 Durante el combate aparecerán "notas" musicales alrededor de la pantalla. Estas
-deberán de ser presionadas a tiempo, preferiblemente sin fallar ninguna. Al
-completar el patrón, un proyectil / onda de daño saldrá disparada al enemigo
-más cercano.
+deberán de ser presionadas a tiempo y en orden, preferiblemente sin fallar
+ninguna. Al completar el patrón, un proyectil / onda de daño saldrá disparada
+al enemigo más cercano.
+
+El orden en el que se deben presionar las notas se identifica por medio del
+tamaño de cada nota, en orden ascendente. Ademas las notas forman un arcoiris.
 
 También se hace uso de un contador de "combo". Por cada nota tocada sin fallar
 este contador aumentará. Mientras más alto sea, los ataques del personaje harán
@@ -49,24 +54,24 @@ daño del ataque.
 
 Un patron de notas mas dificil consta de una combinación de mayor cantidad de
 notas, menor timepo de ejecucion de cada nota y menor tiempo de ejecucion del
-patron entero. La posicion de las notas son generadas es aleatoriamente. El
-espacio en el que pueden aparecer es limitado a un espacio menor que la vista
-del jugador evitando tapar elemtos de la ui.
+patron entero.
 
-#### Forma y vizuales
+#### Forma y Visuales
 
-Al completar un patron se lanzara un ataque. Se vera como una onda expansiva en
-forma de circulo de notas diferentes a las del powercast tendra un rango
-limitado y ignorara obstaculos en el entorno. Este golpea a todos los enemigos
-que alcanze. No causa retroseso.
+La posicion de las notas son generadas es aleatoriamente. El espacio en el que
+pueden aparecer es limitado a un espacio menor que la vista del jugador
+evitando tapar elemtos de la ui.
 
-#### Daño segun el combo
+Al completar un patrón de notas se lanzará un ataque en forma de círculo que se
+expande centrado en el jugador. Este golpea a todos los enemigos que alcance en
+su rango el cual es limitado. El ataque solo causará daño (ningún efecto de
+retroceso o similar).
 
-Como ya se menciono mientras mas alto el combo mayor sera el daño. La manera en
-la que se calculara el daño sera la siguiente: $Daño = dañoBase +
-combo\times2$. Dañp base es un valor arbitrario por decidir. Esta formula solo
-aplica al primer enemigo golpeado, por cada enemigo que sea alcanzado por el
-ataque el daño que recibiran se vera reducido a la mitad.
+#### Calculo del Daño
+
+El daño se calcula con `combo * (notas / notas-presionadas)`, `combo` es un
+entero que representa el nivel del combo, `notas` la canidad de notas del cast,
+y `notas-presionadas` la secuencia mas larga de notas presionadas en orden.
 
 ## Entorno
 
@@ -92,23 +97,23 @@ Criaturas hostiles que buscan capturar al jugador para evitar su escape de la
 mazmorra. Los enemigos persiguen y disparan al jugador, estos aparecen al
 entrar a una sala y desaparecen al ser derrotados. No se regeneran. Los
 disparos varían en tamaño y patrón de lanzamiento. Los enemigos de pisos
-superiores pueden lanzar patrones de balas más complicados.
+superiores pueden lanzar patrones de balas más dificiles.
 
 El comportaminto de la ia en enemigos regulares y de elite es la misma.
 Mantendran su distancia al jugador pero mantendran una linea de vision. Cuando
-tengan linea de vision al jugador haran sus ataques
+tengan linea de vision al jugador haran sus ataques.
 
 Solamente para enemigos regulares existen los enemigos cuerpo a cuerpo los
 cuales tienen un comportamiento diferente de ia. Estos perseguiran al jugador y
 al alcanzarlo haran un ataque cuerpo a cuerpo.
 
-### Regulares
+### Enemigos Regulares
 
 - vida regular
 - Tipos de ataque: cuerpo a cuerpo, bullets
 - tamaño: igual o menor al jugador
 
-### Elites
+### Enemigos Elites
 
 Los elites cuentan con un escudo. Mientras este este activado haran el doble de
 daño. El escudo no puede tener un valor mayor a un tercio de la vida original y
@@ -133,4 +138,3 @@ centro de la sala disparando sus patrones de balas regularmente.
 - regeneracion: al golpear al jugador recuperan 33%
 - tamaño: mucho mas gande que el jugador
 - tipos de ataques: unicamente bullets
-
