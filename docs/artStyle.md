@@ -8,7 +8,10 @@
 
 ### INSPIRACIONES
 
-- El estilo visual esta inspirado principalmente por juegos de arte pixeleado como "In Stars and Time", "Enter the Gungeon" y "Celeste".
+- El estilo visual esta inspirado principalmente por juegos de arte pixeleado como "In Stars and Time", "Enter the Gungeon" y "Celeste". Aunque tambien tomara inspiracion del juego "The binding of Issac"
+  - "In stars and time" es de donde se sacara la inspiracion para el estilo de los sprites
+  - "Enter the Gungeon" y "Celeste" sirven de inspiracion para la creacion de habitaciones y colores
+  - "The binding of Issac" sirve como inspiracion también para manejar el layout de la mazmorra
 
 ---
 
@@ -44,6 +47,6 @@ Al comenzar el juego, en el nivel breve de tutorial te encontrarias en una celda
 
 ### MUSICA / SFX
 
-La musica la estamos adquiriendo principalmente de este [sitio](https://pixabay.com/music/). Buscamos utilizar musica clasica por la tematica de musica clasica del juego. Va a haber una cancion para los menus, una para combate en general y una distinta para los jefes del calabozo.
+La musica la estamos adquiriendo principalmente de este [sitio](https://pixabay.com/music/). Buscamos utilizar musica asociada a la musica medieval instrumental principalmente. Va a haber una cancion para los menus, una para combate en general y una distinta para los jefes del calabozo.
 
 Los SFX seran adquiridos de este [sitio](https://pixabay.com/sound-effects/). Seran utilizados en el menu, para ataques y para la ambientación.
