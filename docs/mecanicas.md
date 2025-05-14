@@ -46,9 +46,9 @@ tamaño de cada nota, en orden ascendente. Ademas las notas forman un arcoiris.
 
 También se hace uso de un contador de `combo`. Por cada nota tocada sin fallar
 este contador aumentará. Mientras más alto sea, los ataques del personaje harán
-más daño y, mientras más alto sea el `combo`, los patrones siguientes se volverán
-más complicados. El contador regresa a 0 al fallar, anulando o reduciendo el
-daño del ataque.
+más daño y, mientras más alto sea el `combo`, los patrones siguientes se
+volverán más complicados. El contador regresa a 0 al fallar, anulando o
+reduciendo el daño del ataque.
 
 #### Definicion de dificultad
 
@@ -70,8 +70,16 @@ retroceso o similar).
 #### Calculo del Daño
 
 El daño se calcula con `combo * (notas / notas-presionadas)`, `combo` es un
-entero que representa el nivel del `combo`, `notas` la canidad de notas del cast,
-y `notas-presionadas` la secuencia mas larga de notas presionadas en orden.
+entero que representa el nivel del `combo`, `notas` la canidad de notas del
+cast, y `notas-presionadas` la secuencia mas larga de notas presionadas en
+orden.
+
+#### Frecuencia
+
+Mientras el jugador este dentro de combate en la sala apareceran instrumentos,
+al recojerlos se iniciara un patron de notas para lanzar un ataque. El
+propposito es que el jugador sea muy conciente al momento de esquivar y a la
+vez planifique como alcanzara estos instumentos para contratacar.
 
 ## Entorno
 
