@@ -44,9 +44,9 @@ al enemigo más cercano.
 El orden en el que se deben presionar las notas se identifica por medio del
 tamaño de cada nota, en orden ascendente. Ademas las notas forman un arcoiris.
 
-También se hace uso de un contador de "combo". Por cada nota tocada sin fallar
+También se hace uso de un contador de `combo`. Por cada nota tocada sin fallar
 este contador aumentará. Mientras más alto sea, los ataques del personaje harán
-más daño y, mientras más alto sea el combo, los patrones siguientes se volverán
+más daño y, mientras más alto sea el `combo`, los patrones siguientes se volverán
 más complicados. El contador regresa a 0 al fallar, anulando o reduciendo el
 daño del ataque.
 
@@ -70,7 +70,7 @@ retroceso o similar).
 #### Calculo del Daño
 
 El daño se calcula con `combo * (notas / notas-presionadas)`, `combo` es un
-entero que representa el nivel del combo, `notas` la canidad de notas del cast,
+entero que representa el nivel del `combo`, `notas` la canidad de notas del cast,
 y `notas-presionadas` la secuencia mas larga de notas presionadas en orden.
 
 ## Entorno
@@ -120,7 +120,7 @@ daño. El escudo no puede tener un valor mayor a un tercio de la vida original y
 no se puede regenerar
 
 - vida buena
-- escudo regular: ninguna
+- escudo: ninguno
 - regeneracion de escudo
 - tamaño: mayor al jugador
 - tipos de ataques: unicamente bullets
