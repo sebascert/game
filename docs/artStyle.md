@@ -20,9 +20,7 @@
 - **Magnus Opus (protagonista)**
   - Caracteristicas resaltantes son su sombrero y su uso de instrumentos musicales magicos.
 
-Sonata toma lugar en una mazmorra de 3 niveles con jefes entre cada nivel. Los cuartos son simples y lineales siempre llevandote a una pelea con un jefe y al siguiente nivel.
-
-Los escenarios tendran tematica general de una mazmorra medieval con ligeras variaciones dependiendo del jefe del nivel.
+Los escenarios del juego tendran tematica general de una mazmorra medieval con ligeras variaciones dependiendo del jefe del nivel
 
 Al comenzar el juego, en el nivel breve de tutorial te encontrarias en una celda que conectaria imediatamente al nivel 1.
 
