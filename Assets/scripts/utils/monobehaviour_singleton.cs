@@ -2,7 +2,7 @@ using System;
 
 using UnityEngine;
 
-public class MonoBehaviourSingleton<T> : MonoBehaviour where T : MonoBehaviourSingleton<T>
+class MonoBehaviourSingleton<T> : MonoBehaviour where T : MonoBehaviourSingleton<T>
 {
     public static T instance { get; protected set; }
 
