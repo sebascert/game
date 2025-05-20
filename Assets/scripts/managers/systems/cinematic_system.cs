@@ -18,7 +18,7 @@ class CinematicSystem : GameSystem
     public override void Init()
     {
     }
-    
+
     private IEnumerator PlayCinematic(string cinematic)
     {
         Cinematic foundCinematic = cinematics.FirstOrDefault(cnm => cnm.name == cinematic);
