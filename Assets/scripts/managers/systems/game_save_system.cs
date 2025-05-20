@@ -4,7 +4,7 @@ using System.Linq;
 
 using UnityEngine;
 
-class GameSaveSystem : MonoBehaviourSingleton<GameSaveSystem>
+class GameSaveSystem : GameSystem
 {
     public const string saveFileName = "game-";
     public const string saveDir = "saves";
@@ -30,7 +30,7 @@ class GameSaveSystem : MonoBehaviourSingleton<GameSaveSystem>
     {
         if (slots[id.value] == null)
             return null;
- 
+
         return PersistentDataSystem.Load<GameSave>(id.Path());
     }
 
@@ -50,7 +50,7 @@ class GameSaveSystem : MonoBehaviourSingleton<GameSaveSystem>
             Debug.LogWarning("GameSaveSystem: invalid GameID provided to SaveInSlot");
             return false;
         }
- 
+
         return PersistentDataSystem.Save(id.Path(), save);
     }
 
