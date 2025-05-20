@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 
 // TODO optional improvement
 // have a transition scene, would require a scene manager
-class CinematicSystem : GameSystem
+class CinematicSystem : GameSystem<CinematicSystem>
 {
     [SerializeField]
     private Cinematic[] cinematics;

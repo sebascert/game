@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-class InputSystem : GameSystem
+class InputSystem : GameSystem<InputSystem>
 {
     private bool _playerInput;
     public bool PlayerInput

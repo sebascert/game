@@ -2,7 +2,7 @@ using System;
 
 using UnityEngine;
 
-class GameMenuSytem : GameSystem
+class GameMenuSytem : GameSystem<GameMenuSytem>
 {
     // ascending rendering order
     [SerializeField]

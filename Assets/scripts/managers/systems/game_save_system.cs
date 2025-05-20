@@ -4,7 +4,7 @@ using System.Linq;
 
 using UnityEngine;
 
-class GameSaveSystem : GameSystem
+class GameSaveSystem : GameSystem<GameSaveSystem>
 {
     public const string SaveFileName = "game-";
     public const string SaveDir = "saves";
@@ -14,6 +14,9 @@ class GameSaveSystem : GameSystem
 
     public override void Init()
     {
+        if (!Directory.Exists(SaveDir))
+            Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, SaveDir));
+        
         _slots = new GameID[SlotCount];
         string[] saves = Directory.GetFiles(Path.Combine(Application.persistentDataPath, SaveDir), $"{SaveDir}game-*");
         if (saves.Length > SlotCount)

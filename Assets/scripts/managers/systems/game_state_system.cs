@@ -2,7 +2,7 @@ using System;
 
 using UnityEngine;
 
-class GameStateSystem : GameSystem
+class GameStateSystem : GameSystem<GameStateSystem>
 {
     public GameState State { get; private set; } = GameState.Start;
 
