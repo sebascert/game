@@ -6,29 +6,29 @@ using UnityEngine;
 
 class GameSaveSystem : GameSystem
 {
-    public const string saveFileName = "game-";
-    public const string saveDir = "saves";
+    public const string SaveFileName = "game-";
+    public const string SaveDir = "saves";
 
-    public const int slotCount = 3;
-    private GameID[] slots;
+    public const int SlotCount = 3;
+    private GameID[] _slots;
 
     private void Start()
     {
-        slots = new GameID[slotCount];
-        string[] saves = Directory.GetFiles(Path.Combine(Application.persistentDataPath, saveDir), $"{saveDir}game-*");
-        if (saves.Length > slotCount)
+        _slots = new GameID[SlotCount];
+        string[] saves = Directory.GetFiles(Path.Combine(Application.persistentDataPath, SaveDir), $"{SaveDir}game-*");
+        if (saves.Length > SlotCount)
             throw new Exception("GameSaveSystem: more saved games than slots");
 
         foreach (string save in saves)
         {
             GameID gameID = new GameID(save);
-            slots[gameID.value] = gameID;
+            _slots[gameID.value] = gameID;
         }
     }
 
     public GameSave Load(GameID id)
     {
-        if (slots[id.value] == null)
+        if (_slots[id.value] == null)
             return null;
 
         return PersistentDataSystem.Load<GameSave>(id.Path());
@@ -36,7 +36,7 @@ class GameSaveSystem : GameSystem
 
     public bool NewSave(GameSave save)
     {
-        GameID id = slots.FirstOrDefault(slot => slot != null);
+        GameID id = _slots.FirstOrDefault(slot => slot != null);
         if (id == null)
             return false;
 
@@ -45,7 +45,7 @@ class GameSaveSystem : GameSystem
 
     public bool SaveInSlot(GameSave save, GameID id)
     {
-        if (id.value > slotCount)
+        if (id.value > SlotCount)
         {
             Debug.LogWarning("GameSaveSystem: invalid GameID provided to SaveInSlot");
             return false;
@@ -71,7 +71,7 @@ public class GameID
     }
     public string Path()
     {
-        return System.IO.Path.Combine(GameSaveSystem.saveDir, GameSaveSystem.saveFileName, value.ToString());
+        return System.IO.Path.Combine(GameSaveSystem.SaveDir, GameSaveSystem.SaveFileName, value.ToString());
     }
 }
 [Serializable]

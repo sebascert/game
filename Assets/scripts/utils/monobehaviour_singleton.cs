@@ -4,15 +4,15 @@ using UnityEngine;
 
 class MonoBehaviourSingleton<T> : MonoBehaviour where T : MonoBehaviourSingleton<T>
 {
-    public static T instance { get; protected set; }
+    public static T Instance { get; protected set; }
 
     private void Awake()
     {
-        if (instance && instance != this)
+        if (Instance && Instance != this)
         {
             Destroy(this);
             throw new Exception($"An instance of {typeof(T)} already exists.");
         }
-        instance = (T)this;
+        Instance = (T)this;
     }
 }

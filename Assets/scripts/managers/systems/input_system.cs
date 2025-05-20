@@ -6,7 +6,7 @@ using UnityEngine;
 class InputSystem : GameSystem
 {
     private bool _playerInput;
-    public bool playerInput
+    public bool PlayerInput
     {
         get => _playerInput;
         set
@@ -15,45 +15,45 @@ class InputSystem : GameSystem
                 return;
             foreach (var ax in _axis)
             {
-                _axis[ax.Key].value = 0;
+                _axis[ax.Key].Value = 0;
             }
         }
     }
 
-    const string horizontalAxis = "Horizontal";
-    const string verticalAxis = "Vertical";
+    const string HorizontalAxis = "Horizontal";
+    const string VerticalAxis = "Vertical";
 
     private Dictionary<string, InputAxis> _axis = new Dictionary<string, InputAxis>();
 
     private void Start()
     {
-        _axis[horizontalAxis] = new InputAxis(Input.GetAxis(horizontalAxis));
-        _axis[verticalAxis] = new InputAxis(Input.GetAxis(verticalAxis));
+        _axis[HorizontalAxis] = new InputAxis(Input.GetAxis(HorizontalAxis));
+        _axis[VerticalAxis] = new InputAxis(Input.GetAxis(VerticalAxis));
     }
 
     public float GetAxis(string axis)
     {
-        if (!_axis[axis].enable)
+        if (!_axis[axis].Enable)
             return 0;
-        if (playerInput)
-            _axis[axis].value = Input.GetAxis(axis);
-        return _axis[axis].value;
+        if (PlayerInput)
+            _axis[axis].Value = Input.GetAxis(axis);
+        return _axis[axis].Value;
     }
 
     public void EnableAxis(string axis, bool value)
     {
-        _axis[axis].enable = value;
+        _axis[axis].Enable = value;
     }
 
     [Serializable]
     public class InputAxis
     {
-        public float value { get; internal set; }
-        public bool enable { get; internal set; }
+        public float Value { get; internal set; }
+        public bool Enable { get; internal set; }
 
         public InputAxis(float value)
         {
-            this.value = value;
+            this.Value = value;
         }
     }
 }
