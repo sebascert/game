@@ -15,6 +15,10 @@ class CinematicSystem : GameSystem
     [SerializeField]
     private Cinematic[] cinematics;
 
+    public override void Init()
+    {
+    }
+    
     private IEnumerator PlayCinematic(string cinematic)
     {
         Cinematic foundCinematic = cinematics.FirstOrDefault(cnm => cnm.name == cinematic);

@@ -12,7 +12,7 @@ class GameSaveSystem : GameSystem
     public const int SlotCount = 3;
     private GameID[] _slots;
 
-    private void Start()
+    public override void Init()
     {
         _slots = new GameID[SlotCount];
         string[] saves = Directory.GetFiles(Path.Combine(Application.persistentDataPath, SaveDir), $"{SaveDir}game-*");

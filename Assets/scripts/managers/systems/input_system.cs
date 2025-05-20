@@ -25,7 +25,7 @@ class InputSystem : GameSystem
 
     private Dictionary<string, InputAxis> _axis = new Dictionary<string, InputAxis>();
 
-    private void Start()
+    public override void Init()
     {
         _axis[HorizontalAxis] = new InputAxis(Input.GetAxis(HorizontalAxis));
         _axis[VerticalAxis] = new InputAxis(Input.GetAxis(VerticalAxis));
