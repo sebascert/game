@@ -2,7 +2,7 @@ using System;
 
 using UnityEngine;
 
-abstract class GameSystemBase: MonoBehaviour
+abstract class GameSystemBase : MonoBehaviour
 {
     public abstract void Init();
 }

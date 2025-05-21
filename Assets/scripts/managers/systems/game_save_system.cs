@@ -16,7 +16,7 @@ class GameSaveSystem : GameSystem<GameSaveSystem>
     {
         if (!Directory.Exists(SaveDir))
             Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, SaveDir));
-        
+
         _slots = new GameID[SlotCount];
         string[] saves = Directory.GetFiles(Path.Combine(Application.persistentDataPath, SaveDir), $"{SaveDir}game-*");
         if (saves.Length > SlotCount)

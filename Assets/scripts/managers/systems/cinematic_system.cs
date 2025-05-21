@@ -19,7 +19,7 @@ class CinematicSystem : GameSystem<CinematicSystem>
     {
     }
 
-    private IEnumerator PlayCinematic(string cinematic)
+    public IEnumerator PlayCinematic(string cinematic)
     {
         Cinematic foundCinematic = cinematics.FirstOrDefault(cnm => cnm.name == cinematic);
         if (foundCinematic == null)

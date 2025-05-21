@@ -4,7 +4,46 @@ using UnityEngine;
 
 class GameStateSystem : GameSystem<GameStateSystem>
 {
-    public GameState State { get; private set; } = GameState.Start;
+    private GameState _prevState ;
+    private GameState _state = GameState.Start;
+    public GameState State
+    {
+        get => _state;
+        set
+        {
+            if (value == GameState.Start)
+                goto INVALID_STATE_TRANSITION;
+            switch (_state)
+            {
+                case GameState.Start:
+                    if (value != GameState.MainMenu)
+                        goto INVALID_STATE_TRANSITION;
+                    break;
+                case GameState.MainMenu:
+                    if (value != GameState.OnLevel)
+                        goto INVALID_STATE_TRANSITION;
+                    break;
+                case GameState.OnDungeon:
+                    if (value != GameState.OnLevel && value != GameState.Pause)
+                        goto INVALID_STATE_TRANSITION;
+                    break;
+                case GameState.Pause:
+                    if (value != _prevState)
+                        goto INVALID_STATE_TRANSITION;
+                    break;
+                case GameState.OnLevel:
+                    if (value != GameState.OnDungeon && value != GameState.Pause)
+                        goto INVALID_STATE_TRANSITION;
+                    break;
+            }
+
+            _prevState = _state;
+            _state = value;
+            
+            INVALID_STATE_TRANSITION:
+                throw new Exception($"GameManager: invalid state transition, from {_state} to {value}");
+        }
+    }
 
     private GameID _gameID;
     public GameID GameID
@@ -13,13 +52,24 @@ class GameStateSystem : GameSystem<GameStateSystem>
         set
         {
             if (State != GameState.MainMenu)
-                Debug.LogError("GameManager: attempting to modify GameID on invalid state");
+                throw new Exception($"GameManager: attempting to modify GameID on invalid state {_state}");
             _gameID = value;
         }
     }
 
     // game info
-    public int Level { get; private set; }
+    private int _level;
+
+    public int Level
+    {
+        get => _level;
+        set
+        {
+            if (_state != GameState.MainMenu && _state != GameState.OnLevel)
+                throw new Exception($"GameManager: attempting to modify Level on invalid state {_state}");
+            _level = value;
+        }
+    }
 
     public override void Init()
     {
@@ -33,7 +83,6 @@ enum GameState
     Start,
     MainMenu,
     Pause,
-    Cinematic,
     OnLevel,
     OnDungeon,
 }

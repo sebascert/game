@@ -21,22 +21,14 @@ class GameMenuSytem : GameSystem<GameMenuSytem>
 
     public void EnableMainMenu(bool value)
     {
-        if (value && pauseMenu.activeSelf)
-            pauseMenu.SetActive(false);
-
         mainMenu.SetActive(value);
     }
     public void EnablePauseMenu(bool value)
     {
-        if (mainMenu.activeSelf)
-            return;
         pauseMenu.SetActive(value);
     }
     public void EnableConfigMenu(bool value)
     {
-        // no direct access to the configs menu
-        // if (!mainMenu.activeSelf && !pauseMenu.activeSelf)
-        //     return
         mainMenu.SetActive(value);
     }
 }
