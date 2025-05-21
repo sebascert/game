@@ -1,10 +1,8 @@
 using System;
 
-using UnityEngine;
-
 class GameStateSystem : GameSystem<GameStateSystem>
 {
-    private GameState _prevState ;
+    private GameState _prevState;
     private GameState _state = GameState.Start;
     public GameState State
     {
@@ -39,9 +37,9 @@ class GameStateSystem : GameSystem<GameStateSystem>
 
             _prevState = _state;
             _state = value;
-            
-            INVALID_STATE_TRANSITION:
-                throw new Exception($"GameManager: invalid state transition, from {_state} to {value}");
+
+        INVALID_STATE_TRANSITION:
+            throw new Exception($"GameManager: invalid state transition, from {_state} to {value}");
         }
     }
 
@@ -59,7 +57,6 @@ class GameStateSystem : GameSystem<GameStateSystem>
 
     // game info
     private int _level;
-
     public int Level
     {
         get => _level;

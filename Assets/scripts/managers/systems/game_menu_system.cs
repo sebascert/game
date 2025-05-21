@@ -1,5 +1,3 @@
-using System;
-
 using UnityEngine;
 
 class GameMenuSytem : GameSystem<GameMenuSytem>

@@ -26,8 +26,7 @@ class CinematicSystem : GameSystem<CinematicSystem>
             throw new Exception($"CinematicSystem: cinematic {name} not found");
 
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(foundCinematic.scene.name, LoadSceneMode.Additive);
-        while (asyncLoad is { isDone: false })
-            yield return null;
+        yield return new WaitUntil(() => asyncLoad is { isDone: true });
 
         Scene loadedScene = SceneManager.GetSceneByName(foundCinematic.scene.name);
 
@@ -46,8 +45,7 @@ class CinematicSystem : GameSystem<CinematicSystem>
         yield return new WaitUntil(() => director.state != PlayState.Playing);
 
         AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(loadedScene);
-        while (asyncUnload is { isDone: false })
-            yield return null;
+        yield return new WaitUntil(() => asyncUnload is { isDone: true });
     }
 }
 

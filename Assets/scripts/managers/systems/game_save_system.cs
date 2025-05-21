@@ -88,7 +88,7 @@ class GameSaveSystem : GameSystem<GameSaveSystem>
     }
 }
 
-public class GameID
+class GameID
 {
     public int value;
 
@@ -122,9 +122,9 @@ class GameSave
     }
 }
 
-public class UnableToSaveGameException : Exception
+class UnableToSaveGameException : Exception
 {
 }
-public class UnableToLoadGameException : Exception
+class UnableToLoadGameException : Exception
 {
 }

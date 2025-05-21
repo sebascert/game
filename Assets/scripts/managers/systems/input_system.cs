@@ -5,6 +5,9 @@ using UnityEngine;
 
 class InputSystem : GameSystem<InputSystem>
 {
+    public const string HorizontalAxis = "Horizontal";
+    public const string VerticalAxis = "Vertical";
+
     private bool _playerInput;
     public bool PlayerInput
     {
@@ -19,9 +22,6 @@ class InputSystem : GameSystem<InputSystem>
             }
         }
     }
-
-    const string HorizontalAxis = "Horizontal";
-    const string VerticalAxis = "Vertical";
 
     private Dictionary<string, InputAxis> _axis = new Dictionary<string, InputAxis>();
 
