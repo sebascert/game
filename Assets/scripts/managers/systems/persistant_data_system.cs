@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
 using UnityEngine;
@@ -22,11 +23,21 @@ static class PersistentDataSystem
             return false;
         }
 
-        formatter.Serialize(stream, obj);
-        stream.Close();
-
-        return true;
+        try
+        {
+            formatter.Serialize(stream, obj);
+            return true;
+        }
+        catch (SerializationException _)
+        {
+            return false;
+        }
+        finally
+        {
+            stream.Close();
+        }
     }
+
     public static T Load<T>(string file) where T : class
     {
         string path = Path.Combine(Application.persistentDataPath, file);
@@ -46,8 +57,18 @@ static class PersistentDataSystem
             return null;
         }
 
-        T data = formatter.Deserialize(stream) as T;
-        stream.Close();
-        return data;
+        try
+        {
+            T data = formatter.Deserialize(stream) as T;
+            return data;
+        }
+        catch (SerializationException _)
+        {
+            return null;
+        }
+        finally
+        {
+            stream.Close();
+        }
     }
 }
