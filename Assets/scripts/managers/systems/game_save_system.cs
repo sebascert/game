@@ -30,6 +30,27 @@ class GameSaveSystem : GameSystem<GameSaveSystem>
     }
 
     /// return save if saved in given slot (GameID), throws UnableToLoadGameException
+    public bool Remove(GameID id)
+    {
+        if (id.value > SlotCount)
+            throw new Exception("GameSaveSystem: invalid GameID provided");
+
+        if (Slots[id.value] == null)
+            return false;
+
+        try
+        {
+            File.Delete(id.Path());
+        }
+        catch (Exception ex) when (ex is UnauthorizedAccessException || ex is IOException)
+        {
+            throw new UnableToRemoveGameException();
+        }
+
+        return true;
+    }
+
+    /// return save if saved in given slot (GameID), throws UnableToLoadGameException
     public GameSave Load(GameID id)
     {
         if (id.value > SlotCount)
@@ -122,6 +143,9 @@ class GameSave
     }
 }
 
+class UnableToRemoveGameException : Exception
+{
+}
 class UnableToSaveGameException : Exception
 {
 }

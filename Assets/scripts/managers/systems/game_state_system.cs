@@ -30,7 +30,7 @@ class GameStateSystem : GameSystem<GameStateSystem>
                         goto INVALID_STATE_TRANSITION;
                     break;
                 case GameState.OnLevel:
-                    if (value != GameState.OnDungeon && value != GameState.Pause)
+                    if (value != GameState.OnDungeon && value != GameState.Pause && value != GameState.MainMenu)
                         goto INVALID_STATE_TRANSITION;
                     break;
             }
