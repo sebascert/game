@@ -39,13 +39,11 @@ class GameManager : MonoBehaviourSingleton<GameManager>
             GameSaveSystem.Instance.NewSave(savedGame);
         }
 
-        // store game state
         GameStateSystem.Instance.GameID = id;
         GameStateSystem.Instance.State = GameState.OnLevel;
         GameStateSystem.Instance.Level = savedGame.level;
 
         yield return StartCoroutine(CinematicSystem.Instance.PlayCinematic($"enter-level-{savedGame.level}"));
-
         yield return StartCoroutine(LoadLevel(savedGame.level));
 
         _runningCoroutine = null;
@@ -64,11 +62,10 @@ class GameManager : MonoBehaviourSingleton<GameManager>
         // finished game
         if (GameStateSystem.Instance.Level == levelScenes.Length)
         {
-            SaveGame();
+            GameSaveSystem.Instance.Remove(GameStateSystem.Instance.GameID);
+
             GameStateSystem.Instance.State = GameState.MainMenu;
             GameStateSystem.Instance.GameID = null;
-
-            GameSaveSystem.Instance.Remove(GameStateSystem.Instance.GameID);
 
             yield return StartCoroutine(CinematicSystem.Instance.PlayCinematic("endgame"));
             yield return StartCoroutine(UnloadLevel());
@@ -76,16 +73,32 @@ class GameManager : MonoBehaviourSingleton<GameManager>
             yield break;
         }
 
-        yield return StartCoroutine(UnloadLevel());
-
         int level = GameStateSystem.Instance.Level;
         yield return StartCoroutine(CinematicSystem.Instance.PlayCinematic($"enter-level-{level}"));
-
+        yield return StartCoroutine(UnloadLevel());
         yield return StartCoroutine(LoadLevel(GameStateSystem.Instance.Level));
 
         _runningCoroutine = null;
     }
 
+    public void LoseGame()
+    {
+        if (_runningCoroutine != null)
+            return;
+        _runningCoroutine = StartCoroutine(LoseGameCoroutine());
+    }
+    private IEnumerator LoseGameCoroutine()
+    {
+        GameSaveSystem.Instance.Remove(GameStateSystem.Instance.GameID);
+
+        GameStateSystem.Instance.State = GameState.MainMenu;
+        GameStateSystem.Instance.GameID = null;
+
+        yield return StartCoroutine(CinematicSystem.Instance.PlayCinematic("losegame"));
+        yield return StartCoroutine(UnloadLevel());
+
+        _runningCoroutine = null;
+    }
     public void QuitGame()
     {
         if (_runningCoroutine != null)
@@ -95,12 +108,12 @@ class GameManager : MonoBehaviourSingleton<GameManager>
     private IEnumerator QuitGameCoroutine()
     {
         SaveGame();
+
         GameStateSystem.Instance.State = GameState.MainMenu;
         GameStateSystem.Instance.GameID = null;
 
-        yield return StartCoroutine(UnloadLevel());
-
         yield return StartCoroutine(CinematicSystem.Instance.PlayCinematic("quitgame"));
+        yield return StartCoroutine(UnloadLevel());
 
         _runningCoroutine = null;
     }
