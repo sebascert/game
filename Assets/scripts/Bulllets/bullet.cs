@@ -38,8 +38,11 @@ public class Bullet : MonoBehaviour
         Health playerHealth = collision.GetComponent<Health>();
         if (playerHealth != null && collision.CompareTag("Player"))
         {
-            playerHealth.TakeDamage();
-            Destroy(gameObject);
+            if(!playerHealth.isInvincible)
+            {
+                playerHealth.TakeDamage();
+                Destroy(gameObject);
+            }
         }
     }
 

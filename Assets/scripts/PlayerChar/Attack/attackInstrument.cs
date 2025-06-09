@@ -12,17 +12,6 @@ public class attackInstrument : MonoBehaviour
 
     void Start()
     {
-        /*if (MinigameResult.totalDamage > 0f)
-        {
-            EnemyHealth enemy = FindFirstObjectByType<EnemyHealth>();
-            if (enemy != null)
-            {
-                enemy.TakeDamage(MinigameResult.totalDamage);
-            }
-
-            MinigameResult.totalDamage = 0f;
-        }*/
-
         Destroy(gameObject, despawn_time);
     }
 

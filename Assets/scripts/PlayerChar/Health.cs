@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class Health : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class Health : MonoBehaviour
 
     public Slider healthSlider;
     public bool isInvincible = false;
-
+    public float invulnerabilityFrames;
 
     void Start()
     {
@@ -23,6 +24,7 @@ public class Health : MonoBehaviour
             return;
 
         currentHits ++;
+        StartCoroutine(startInvFrames());
         UpdateHealthBar();
         if (currentHits >= maxHealth)
         {
@@ -41,5 +43,13 @@ public class Health : MonoBehaviour
         Destroy(gameObject);
         if (healthSlider != null)
             healthSlider.gameObject.SetActive(false);
+        // change to game over scene
+    }
+
+    public IEnumerator startInvFrames()
+    {   
+        isInvincible = true;
+        yield return new WaitForSeconds(invulnerabilityFrames);
+        isInvincible = false;
     }
 }

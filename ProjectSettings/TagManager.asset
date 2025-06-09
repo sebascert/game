@@ -50,11 +50,11 @@ TagManager:
   - name: Walls
     uniqueID: 4269958879
     locked: 0
-  - name: Bullets
-    uniqueID: 2390258605
-    locked: 0
   - name: Items
     uniqueID: 3056824127
+    locked: 0
+  - name: Bullets
+    uniqueID: 2390258605
     locked: 0
   - name: Character
     uniqueID: 1136221051

@@ -54,7 +54,7 @@ public class MinigameManager : MonoBehaviour
 
     public void NoteHit(Vector3 position)
     {
-        currentCombo += .25f;
+        currentCombo += .5f;
         
         float distance = Mathf.Abs(position.y);
         if (distance < 0.15f)
@@ -109,14 +109,14 @@ public class MinigameManager : MonoBehaviour
     {
         float accuracy = Mathf.Clamp01(notesPressed / totalNotes);
         float damage = currentCombo * accuracy; //currentCombo * (totalNotes / notesPressed);
-        float baseDamage = 20f;
+        float baseDamage = (currentScore/2)/100;
         MinigameResult.totalDamage = damage * baseDamage;
 
         GameObject player = GameObject.FindWithTag("Player");
         if (player != null)
         {
             player.GetComponent<Movement>().isFrozen = false;
-            player.GetComponent<Health>().isInvincible = false;
+            StartCoroutine(player.GetComponent<Health>().startInvFrames());
         }
 
         SceneManager.UnloadSceneAsync("Minigame");
