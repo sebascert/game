@@ -20,7 +20,7 @@ public class deployAttackInstrument : MonoBehaviour
     private void SpawnInstrument()
     {
         if (playerTransform != null && currentInstrument == null)
-        {
+        {   
             Vector2 randomOffset = Random.insideUnitCircle * spawnRadius;
             Vector2 spawnPosition = (Vector2)playerTransform.position + randomOffset;
 

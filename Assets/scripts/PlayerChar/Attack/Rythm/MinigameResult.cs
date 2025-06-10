@@ -12,7 +12,9 @@ public class MinigameResult : MonoBehaviour
         {
             SpawnCircle();
             totalDamage = 0f;
-            // instantiate attach prefab object
+            
+            GameObject player = GameObject.FindWithTag("Player");
+            StartCoroutine(player.GetComponent<Health>().startInvFrames());
         }
     }
 

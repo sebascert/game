@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyChase : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject playerTransform;
     public float speed;
     public int range;
     public int closure;
@@ -11,6 +11,7 @@ public class EnemyChase : MonoBehaviour
 
     void Update()
     {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
             distance = Vector2.Distance(transform.position, player.transform.position);
@@ -28,6 +29,9 @@ public class EnemyChase : MonoBehaviour
                     speed * Time.deltaTime
                 );
             }
+        } else
+        {
+            Debug.LogError("Player with tag 'Player' not found in the scene.");
         }
     }
 }

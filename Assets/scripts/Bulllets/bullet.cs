@@ -39,7 +39,7 @@ public class Bullet : MonoBehaviour
         Movement playerMovement = collision.GetComponent<Movement>();
         if (playerHealth != null && collision.CompareTag("Player"))
         {
-            if(!playerHealth.isInvincible || !playerMovement.isDashing)
+            if(!playerHealth.isInvincible && !playerMovement.isDashing)
             {
                 playerHealth.TakeDamage();
                 Destroy(gameObject);

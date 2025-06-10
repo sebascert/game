@@ -115,9 +115,7 @@ public class MinigameManager : MonoBehaviour
         if (player != null)
         {
             player.GetComponent<Movement>().isFrozen = false;
-            player.GetComponent<Health>().isInvincible = true;
-
-            StartCoroutine(player.GetComponent<Health>().startInvFrames());
+            player.GetComponent<Health>().isInvincible = false;
         }
 
         SceneManager.UnloadSceneAsync("Minigame");
