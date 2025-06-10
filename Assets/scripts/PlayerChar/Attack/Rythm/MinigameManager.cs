@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class MinigameManager : MonoBehaviour
 {
-    public string returnSceneName = "Sala1"; 
     public bool startPlaying;
     public BeatScroller BS;
     public AudioSource music;

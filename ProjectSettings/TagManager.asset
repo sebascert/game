@@ -65,6 +65,9 @@ TagManager:
   - name: rythmAssets
     uniqueID: 705232093
     locked: 0
+  - name: rythmNotes
+    uniqueID: 3907629633
+    locked: 0
   - name: rythmEffects
     uniqueID: 1157075077
     locked: 0

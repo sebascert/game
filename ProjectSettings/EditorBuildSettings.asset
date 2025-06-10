@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/scenes/Minigame.unity
     guid: a7efac3f0da73e7439004acd29203987
   - enabled: 1
-    path: Assets/scenes/sala1.unity
+    path: Assets/sala1.unity
     guid: 89a01bda0410bb8459b4b6a24d1fb537
   - enabled: 1
     path: Assets/scenes/Start.unity
