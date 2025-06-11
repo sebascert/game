@@ -32,6 +32,16 @@ public class Health : MonoBehaviour
         }
     }
 
+    public void RecoverHealth(int amount)
+    {
+        currentHits -= amount;
+        if(currentHits <=0) //prevent negative hit mark
+        {
+            currentHits = 0;
+        }
+        UpdateHealthBar();
+    }
+
     void UpdateHealthBar()
     {
         if (healthSlider != null)
