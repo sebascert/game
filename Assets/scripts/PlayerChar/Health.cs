@@ -58,10 +58,8 @@ public class Health : MonoBehaviour
 
     public IEnumerator startInvFrames()
     {   
-        Debug.Log("Enter Inv Frames");
         isInvincible = true;
         yield return new WaitForSeconds(invulnerabilityFrames);
         isInvincible = false;
-        Debug.Log("Exit Inv Frames");
     }
 }

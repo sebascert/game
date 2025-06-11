@@ -21,8 +21,6 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        if (Time.timeScale == 0) return;
-
         if(timer > bulletLife) Destroy(this.gameObject);
         timer += Time.deltaTime;
         transform.position = Movement(timer);

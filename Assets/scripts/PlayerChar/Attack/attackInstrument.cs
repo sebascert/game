@@ -19,13 +19,6 @@ public class attackInstrument : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Minigame by: " + collision.gameObject.name);
-            
-            var movement = collision.GetComponent<Movement>();
-            var health = collision.GetComponent<Health>();
-            if (movement != null) movement.isFrozen = true;
-            if (health != null) health.isInvincible = true;
-
             SceneManager.LoadScene(minigameScene, LoadSceneMode.Additive);
         }
     }

@@ -27,10 +27,7 @@ public class deployAttackInstrument : MonoBehaviour
             currentInstrument = Instantiate(attackInstrumentPrefab, spawnPosition, Quaternion.identity);
 
             attackInstrument instrumentScript = currentInstrument.GetComponent<attackInstrument>();
-            if (instrumentScript != null)
-            {
-                instrumentScript.deployScript = this;  
-            }
+            instrumentScript.deployScript = this;  
 
             spawned = true;
         } 
@@ -39,13 +36,6 @@ public class deployAttackInstrument : MonoBehaviour
     //Coroutine
     IEnumerator SpawnLoop()
     {
-        var movement = playerTransform.GetComponent<Movement>();
-
-        while (movement != null && movement.isFrozen)
-        {
-            yield return null; 
-        }
-
         while(true){ 
             if(!spawned)
             {

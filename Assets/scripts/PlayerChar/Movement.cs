@@ -21,7 +21,6 @@ public class Movement : MonoBehaviour
 
     private bool isOnCooldown = false;
     private bool _isDashing = false;
-    public bool isFrozen = false;
     private bool canDash = true;
     private Vector2 dashDir;
 
@@ -37,12 +36,6 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        if(isFrozen)
-        {
-            moveInput = Vector2.zero;
-            return;
-        }
-
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.y = Input.GetAxisRaw("Vertical");
         moveInput = moveInput.normalized;
@@ -50,8 +43,6 @@ public class Movement : MonoBehaviour
 
         if (dashInput && canDash && !isOnCooldown)
         {
-            Debug.Log("DASH INITIATED");
-
             _isDashing = true;
             canDash = false;
             isOnCooldown = true;

@@ -27,7 +27,6 @@ public class EnemySpawner : MonoBehaviour
         {
             Vector2 randomOffset = Random.insideUnitCircle * spawnRadius;
             Vector2 spawnPosition = (Vector2)transform.position + randomOffset;
-            Debug.Log("spawned");
             Instantiate(enemy, spawnPosition, Quaternion.identity);
             yield return new WaitForSeconds(delay);
         }

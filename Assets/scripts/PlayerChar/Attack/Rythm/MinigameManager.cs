@@ -4,13 +4,12 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MinigameManager : MonoBehaviour
+class MinigameManager : MonoBehaviourSingleton<MinigameManager>
 {
     public bool startPlaying;
     public BeatScroller BS;
     public AudioSource music;
 
-    public static MinigameManager instance;
     public GameObject hitEffect, goodEffect, perfectEffect, missEffect;
 
     public int currentScore;
@@ -27,7 +26,6 @@ public class MinigameManager : MonoBehaviour
 
     void Start()
     {
-        instance = this;
         notesPressed = 0f;
     }
 
@@ -77,28 +75,24 @@ public class MinigameManager : MonoBehaviour
 
     public void NomralHit(Vector3 pos)
     {
-        Debug.Log("Normal Hit!");
         Instantiate(hitEffect, pos, Quaternion.identity);
         currentScore += Mathf.RoundToInt(scorePerNote * currentCombo);
     }
 
     public void GoodHit(Vector3 pos)
     {
-        Debug.Log("Good Hit!");
         Instantiate(goodEffect, pos, Quaternion.identity);
         currentScore += Mathf.RoundToInt(scorePerGoodNote * currentCombo);
     }
 
     public void PerfectHit(Vector3 pos)
     {
-        Debug.Log("Perfect Hit!");
         Instantiate(perfectEffect, pos, Quaternion.identity);
         currentScore += Mathf.RoundToInt(scorePerPerfectNote * currentCombo);
     }
 
     public void NoteMissed(Vector3 pos)
     {
-        Debug.Log("miss");
         Instantiate(missEffect, pos, Quaternion.identity);
         currentCombo = 1f;
         comboText.text = "Combo: x" + currentCombo.ToString("F1");
@@ -110,13 +104,6 @@ public class MinigameManager : MonoBehaviour
         float damage = currentCombo * accuracy; //currentCombo * (totalNotes / notesPressed);
         float baseDamage = (currentScore/2)/100;
         MinigameResult.totalDamage = damage * baseDamage;
-
-        GameObject player = GameObject.FindWithTag("Player");
-        if (player != null)
-        {
-            player.GetComponent<Movement>().isFrozen = false;
-            player.GetComponent<Health>().isInvincible = false;
-        }
 
         SceneManager.UnloadSceneAsync("Minigame");
     }

@@ -19,7 +19,7 @@ static class PersistentDataSystem
         }
         catch (Exception ex)
         {
-            Debug.Log($"Error: '{ex.Message}'\nOn file mode create '{path}'");
+            Debug.LogError($"Error: '{ex.Message}'\nOn file mode create '{path}'");
             return false;
         }
 
@@ -53,7 +53,7 @@ static class PersistentDataSystem
         }
         catch (Exception ex)
         {
-            Debug.Log($"Error: '{ex.Message}'\nOn file mode open '{path}'");
+            Debug.LogError($"Error: '{ex.Message}'\nOn file mode open '{path}'");
             return null;
         }
 

@@ -22,7 +22,7 @@ public class NoteObject : MonoBehaviour
                 hasBeenHit = true;
                 gameObject.SetActive(false);
 
-                MinigameManager.instance.NoteHit(transform.position);
+                MinigameManager.Instance.NoteHit(transform.position);
             }
         }
     }
@@ -40,7 +40,7 @@ public class NoteObject : MonoBehaviour
         if(other.tag == "Activator" && !hasBeenHit)
         {
             canBePressed = false;
-            MinigameManager.instance.NoteMissed(transform.position);
+            MinigameManager.Instance.NoteMissed(transform.position);
         }
     }
 }
