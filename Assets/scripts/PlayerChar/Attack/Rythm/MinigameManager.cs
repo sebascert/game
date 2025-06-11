@@ -6,14 +6,15 @@ using UnityEngine.UI;
 
 public class MinigameManager : MonoBehaviour
 {
-    public bool startPlaying;
+    private bool startPlaying;
     public BeatScroller BS;
     public AudioSource music;
+    private bool musicStarted = false;
 
     public static MinigameManager instance;
     public GameObject hitEffect, goodEffect, perfectEffect, missEffect;
 
-    public int currentScore;
+    private int currentScore;
     public int scorePerNote = 100;
     public int scorePerGoodNote = 125;
     public int scorePerPerfectNote = 150;
@@ -22,7 +23,7 @@ public class MinigameManager : MonoBehaviour
     public Text comboText;
     public float currentCombo = 1f;
 
-    public float notesPressed;
+    private float notesPressed;
     public float totalNotes;
 
     void Start()
@@ -33,21 +34,13 @@ public class MinigameManager : MonoBehaviour
 
     void Update()
     {
-        if(!startPlaying)
+        if(!startPlaying && Input.anyKeyDown)
         {
-            if(Input.anyKeyDown)
-            {
-                startPlaying = true;
-                BS.hasStarted = true;
-
-                music.Play();                
-            }
-        } else
+            startPlaying = true;         
+            StartCoroutine(StartAfterDelay());  
+        } else if(startPlaying && musicStarted && !music.isPlaying)
         {
-            if(!music.isPlaying)
-            {
-                ExitMinigame(); 
-            }
+            ExitMinigame(); 
         }
     }
 
@@ -59,6 +52,7 @@ public class MinigameManager : MonoBehaviour
         if (distance < 0.15f)
         {
             PerfectHit(position);
+            startPlaying = true;
         }
         else if (distance < 0.25f)
         {
@@ -73,6 +67,14 @@ public class MinigameManager : MonoBehaviour
         comboText.text = "Combo: " + currentCombo.ToString("F1");
 
         notesPressed++;
+    }
+
+    private IEnumerator StartAfterDelay()
+    {
+        BS.hasStarted = true;
+        yield return new WaitForSeconds(1.5f);
+        music.Play();
+        musicStarted = true;
     }
 
     public void NomralHit(Vector3 pos)
