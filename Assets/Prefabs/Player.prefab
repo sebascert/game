@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6feba39e503a1ae4790cade263dae99c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 8
+  maxHealth: 12
   healthSlider: {fileID: 0}
   isInvincible: 0
   invulnerabilityFrames: 0.75
@@ -191,7 +191,6 @@ MonoBehaviour:
   dashSpeed: 9
   dashTime: 0.4
   cooldown: 0.1
-  isFrozen: 0
 --- !u!95 &3162879994311458228
 Animator:
   serializedVersion: 7

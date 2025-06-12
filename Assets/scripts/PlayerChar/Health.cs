@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
@@ -53,7 +54,7 @@ public class Health : MonoBehaviour
         Destroy(gameObject);
         if (healthSlider != null)
             healthSlider.gameObject.SetActive(false);
-        // change to game over scene
+        SceneManager.LoadScene("MainMenu");
     }
 
     public IEnumerator startInvFrames()

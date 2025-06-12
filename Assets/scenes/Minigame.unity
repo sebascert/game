@@ -2985,7 +2985,7 @@ MonoBehaviour:
   scoreText: {fileID: 1791990394}
   comboText: {fileID: 2046179001}
   currentCombo: 1
-  totalNotes: 12
+  totalNotes: 28
   noteCollisionDist: 0.7
   buttons:
   - {fileID: 450328917}

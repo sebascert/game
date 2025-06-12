@@ -46,12 +46,12 @@ class MinigameManager : MonoBehaviourSingleton<MinigameManager>
         currentCombo += .5f;
         
         float distance = Mathf.Abs(position.y);
-        if (distance < 0.15f)
+        if (distance < 0.08f)
         {
             PerfectHit(position);
             startPlaying = true;
         }
-        else if (distance < 0.25f)
+        else if (distance < 0.15f)
         {
             GoodHit(position);
         }
@@ -105,7 +105,7 @@ class MinigameManager : MonoBehaviourSingleton<MinigameManager>
         Time.timeScale = 1;
         float accuracy = Mathf.Clamp01(notesPressed / totalNotes);
         float damage = currentCombo * accuracy; //currentCombo * (totalNotes / notesPressed);
-        float baseDamage = (currentScore/2)/100;
+        float baseDamage = (currentScore)/1000;
         MinigameResult.totalDamage = damage * baseDamage;
 
         SceneManager.UnloadSceneAsync("Minigame");
