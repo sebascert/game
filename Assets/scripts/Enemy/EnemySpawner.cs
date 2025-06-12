@@ -1,34 +1,50 @@
+using System;
+
 using UnityEngine;
 using System.Collections;
 
+[Serializable]
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject normalEnemy;
-    [SerializeField] private GameObject eliteEnemy;
+    [SerializeField]
+    private GameObject prefab;
+    [SerializeField]
+    private int count;
+    [SerializeField]
+    private float startDelay;
+    [SerializeField]
+    private float delay;
+    [SerializeField]
+    private float spawnRadius;
 
-    [SerializeField] private int numberOfNormalEnemy;
-    [SerializeField] private int numberOfEliteEnemy;
-    [SerializeField] private float delay = 1f;
-    [SerializeField] private float spawnRadius = 3f;
-
-    void OnTriggerEnter2D(Collider2D collision)
+    private void Start()
     {
-        if(collision.gameObject.CompareTag("Player"))
-        {
-            StartCoroutine(spawnEnemy(eliteEnemy, numberOfEliteEnemy));
-            StartCoroutine(spawnEnemy(normalEnemy, numberOfNormalEnemy));
-            Destroy(gameObject);
-        }
+        if (!prefab) 
+            Debug.LogError("missing enemy prefab");
     }
 
-    private IEnumerator spawnEnemy(GameObject enemy, int numberOfEnemy)
+    public IEnumerator StartSpawner(Vector3 position, DungeonController dungeon)
     {
-        for (int i = 0; i < numberOfEnemy; i++)
+        yield return new WaitForSeconds(startDelay);
+        
+        for (int i = 0; i < count; i++)
         {
-            Vector2 randomOffset = Random.insideUnitCircle * spawnRadius;
-            Vector2 spawnPosition = (Vector2)transform.position + randomOffset;
-            Instantiate(enemy, spawnPosition, Quaternion.identity);
+            Vector2 randomOffset = UnityEngine.Random.insideUnitCircle * spawnRadius;
+            Vector2 spawnPosition = (Vector2)position + randomOffset;
+            GameObject enemy = Instantiate(prefab, spawnPosition, Quaternion.identity);
+            dungeon.enemies.Add(enemy);
+            
+            if (i < count - 1)
+                break;
             yield return new WaitForSeconds(delay);
         }
+
+        dungeon.completedSpawners++;
+    }
+    
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, spawnRadius);
     }
 }
