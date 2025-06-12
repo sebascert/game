@@ -603,7 +603,6 @@ MonoBehaviour:
   spawners:
   - {fileID: 1331025446}
   - {fileID: 455371105}
-  - {fileID: 0}
   onClearDungeon:
     m_PersistentCalls:
       m_Calls: []
@@ -1094,8 +1093,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d1960f7915d0db40b19fea4935a69d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextScene: MainMenu
-  timeDelay: 4
+  nextScene: VictoryScreen
+  timeDelay: 3.5
 --- !u!1 &392957711
 GameObject:
   m_ObjectHideFlags: 0

@@ -54,7 +54,7 @@ public class Health : MonoBehaviour
         Destroy(gameObject);
         if (healthSlider != null)
             healthSlider.gameObject.SetActive(false);
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("DefeatScreen");
     }
 
     public IEnumerator startInvFrames()

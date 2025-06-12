@@ -17,6 +17,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/scenes/sala1.unity
     guid: 8bd7c15065c32e44789603ce8b4b30ae
+  - enabled: 1
+    path: Assets/scenes/VictoryScreen.unity
+    guid: c8b2384db8844d1448f534f513f56a7a
+  - enabled: 1
+    path: Assets/scenes/DefeatScreen.unity
+    guid: 27a5276ebfafd1d4289cf4c6c8e3b64b
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
