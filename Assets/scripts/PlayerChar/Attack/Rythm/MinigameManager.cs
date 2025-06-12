@@ -25,21 +25,20 @@ class MinigameManager : MonoBehaviourSingleton<MinigameManager>
     private float notesPressed;
     public float totalNotes;
 
+    public float noteCollisionDist;
+    public ButtonController[] buttons;
+
     void Start()
     {
         notesPressed = 0f;
+        startPlaying = true;         
+        StartCoroutine(StartAfterDelay());  
     }
 
     void Update()
     {
-        if(!startPlaying && Input.anyKeyDown)
-        {
-            startPlaying = true;         
-            StartCoroutine(StartAfterDelay());  
-        } else if(startPlaying && musicStarted && !music.isPlaying)
-        {
+        if(startPlaying && musicStarted && !music.isPlaying)
             ExitMinigame(); 
-        }
     }
 
     public void NoteHit(Vector3 position)
@@ -69,8 +68,9 @@ class MinigameManager : MonoBehaviourSingleton<MinigameManager>
 
     private IEnumerator StartAfterDelay()
     {
+        Time.timeScale = 0;
         BS.hasStarted = true;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSecondsRealtime(1.5f);
         music.Play();
         musicStarted = true;
     }
@@ -102,11 +102,27 @@ class MinigameManager : MonoBehaviourSingleton<MinigameManager>
 
     public void ExitMinigame()
     {
+        Time.timeScale = 1;
         float accuracy = Mathf.Clamp01(notesPressed / totalNotes);
         float damage = currentCombo * accuracy; //currentCombo * (totalNotes / notesPressed);
         float baseDamage = (currentScore/2)/100;
         MinigameResult.totalDamage = damage * baseDamage;
 
         SceneManager.UnloadSceneAsync("Minigame");
+    }
+
+    public bool IsNoteColliding(NoteObject note)
+    {
+        foreach (ButtonController button in buttons)
+        {
+            // buttons and notes must be perfectly synced
+            if (button.transform.position.x != note.transform.position.x)
+                continue;
+            if (Mathf.Abs(button.transform.position.y - note.transform.position.y) > noteCollisionDist)
+                continue;
+            return true;
+        }
+
+        return false;
     }
 }

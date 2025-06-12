@@ -7,8 +7,6 @@ public class attackInstrument : MonoBehaviour
     public string minigameScene = "Minigame";
 
     public deployAttackInstrument deployScript;
-    public delegate void InstrumentDestroyed();
-    public event InstrumentDestroyed OnDestroyed;
 
     void Start()
     {
@@ -19,17 +17,13 @@ public class attackInstrument : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
+            Destroy(gameObject);
             SceneManager.LoadScene(minigameScene, LoadSceneMode.Additive);
         }
     }
 
     void OnDestroy()
     {
-        OnDestroyed?.Invoke();
-
-        if (deployScript != null)
-        {
-            deployScript.OnInstrumentDestroyed();
-        }
+        deployScript.OnInstrumentDestroyed();
     }
 }

@@ -2986,6 +2986,12 @@ MonoBehaviour:
   comboText: {fileID: 2046179001}
   currentCombo: 1
   totalNotes: 12
+  noteCollisionDist: 0.7
+  buttons:
+  - {fileID: 450328917}
+  - {fileID: 42740291}
+  - {fileID: 335185282}
+  - {fileID: 1954822628}
 --- !u!4 &1019266694
 Transform:
   m_ObjectHideFlags: 0

@@ -1,3 +1,5 @@
+using System.Collections;
+
 using UnityEngine;
 
 public class EffectObjects : MonoBehaviour
@@ -6,6 +8,12 @@ public class EffectObjects : MonoBehaviour
 
     void Update()
     {
-        Destroy(gameObject, lifeTime);
+        StartCoroutine(DestroyAfterDelay());
+    }
+
+    private IEnumerator DestroyAfterDelay()
+    {
+        yield return new WaitForSecondsRealtime(lifeTime);
+        Destroy(gameObject);
     }
 }

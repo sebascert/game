@@ -8,39 +8,21 @@ public class NoteObject : MonoBehaviour
     private bool hasBeenHit = false;
     public KeyCode keyToPress;
 
-    void Start()
-    {
-
-    }
-
     void Update()
     {
-        if(Input.GetKeyDown(keyToPress))
-        {
-            if(canBePressed && !hasBeenHit)
-            {
-                hasBeenHit = true;
-                gameObject.SetActive(false);
-
-                MinigameManager.Instance.NoteHit(transform.position);
-            }
-        }
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if(other.tag == "Activator")
-        {
+        if (!canBePressed && MinigameManager.Instance.IsNoteColliding(this))
             canBePressed = true;
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if(other.tag == "Activator" && !hasBeenHit)
+        if (canBePressed && !MinigameManager.Instance.IsNoteColliding(this))
         {
             canBePressed = false;
             MinigameManager.Instance.NoteMissed(transform.position);
+        }
+        if(!hasBeenHit && Input.GetKeyDown(keyToPress) && canBePressed)
+        {
+            hasBeenHit = true;
+            gameObject.SetActive(false);
+
+            MinigameManager.Instance.NoteHit(transform.position);
         }
     }
 }

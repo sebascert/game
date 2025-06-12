@@ -12,7 +12,7 @@ public class EnemyChase : MonoBehaviour
     void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
-        if (playerTransform)
+        if (!playerTransform)
             Debug.LogError("EnemyChase unable to find player");
     }
 
