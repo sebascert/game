@@ -14,14 +14,20 @@ public class DungeonDoor : MonoBehaviour
     public DungeonController controller;
     
     private Collider2D collider;
+    //private SpriteRenderer SR;
 
     private void Start()
     {
         collider = GetComponent<Collider2D>();
         if (!controller)
             Debug.LogError("missing reference to DungeonController");
+        /*
+        SR = GetComponent<SpriteRenderer>();
+        if (!SR)
+            Debug.LogError("missing reference to SpriteREnderer");*/
         
         collider.isTrigger = true;
+        //SR.enabled = false;
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -55,12 +61,13 @@ public class DungeonDoor : MonoBehaviour
     public void Close()
     {
         collider.isTrigger = false;
-        // missing visuals
+        //SR.enabled = true;
+        // missing door sprite
     }
 
     public void Open()
     {
         collider.enabled = false;
-        // missing visuals
+        //SR.enabled = false;
     }
 }

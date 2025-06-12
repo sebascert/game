@@ -26,6 +26,8 @@ public class DungeonController : MonoBehaviour
 
     [SerializeField] 
     private bool cleared;
+    [SerializeField]
+    public static bool onCombat { get; private set; }
     [HideInInspector]
     public int completedSpawners;
     [HideInInspector]
@@ -34,6 +36,7 @@ public class DungeonController : MonoBehaviour
     void Awake()
     {
         cleared = false;
+        onCombat = false;
         
         onStartDungeon.AddListener(() =>
         {
@@ -63,6 +66,7 @@ public class DungeonController : MonoBehaviour
     private IEnumerator EnterDungeon()
     {
         dungeonDoors.ForEach((door) => door.Close());
+        onCombat = true;
         
         cameraConfiner.BoundingShape2D = dungeonConfiner;
         
@@ -80,6 +84,7 @@ public class DungeonController : MonoBehaviour
 
         dungeonDoors.ForEach((door) => door.Open());
 
+        onCombat = false;
         cleared = true;
     }
 }

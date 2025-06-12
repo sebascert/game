@@ -37,7 +37,7 @@ public class deployAttackInstrument : MonoBehaviour
     IEnumerator SpawnLoop()
     {
         while(true){ 
-            if(!spawned)
+            if(!spawned && DungeonController.onCombat)
             {
                 SpawnInstrument();
                 spawned = true;
