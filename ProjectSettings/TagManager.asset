@@ -2,13 +2,16 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
-  tags: []
+  serializedVersion: 3
+  tags:
+  - Wall
+  - Activator
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Wall
   - Water
   - UI
   - 
@@ -41,3 +44,32 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Floor Level
+    uniqueID: 1099023467
+    locked: 0
+  - name: Walls
+    uniqueID: 4269958879
+    locked: 0
+  - name: Items
+    uniqueID: 3056824127
+    locked: 0
+  - name: Bullets
+    uniqueID: 2390258605
+    locked: 0
+  - name: Character
+    uniqueID: 1136221051
+    locked: 0
+  - name: rythmFloor
+    uniqueID: 753670363
+    locked: 0
+  - name: rythmAssets
+    uniqueID: 705232093
+    locked: 0
+  - name: rythmNotes
+    uniqueID: 3907629633
+    locked: 0
+  - name: rythmEffects
+    uniqueID: 1157075077
+    locked: 0
+  m_RenderingLayers:
+  - Default
