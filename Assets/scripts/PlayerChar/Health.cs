@@ -1,7 +1,8 @@
-using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
+
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
@@ -18,13 +19,13 @@ public class Health : MonoBehaviour
         UpdateHealthBar();
     }
 
-    public void TakeDamage( )
+    public void TakeDamage()
     {
         Movement movement = GetComponent<Movement>();
-        if ((movement != null && movement.isDashing) || isInvincible) 
+        if ((movement != null && movement.isDashing) || isInvincible)
             return;
 
-        currentHits ++;
+        currentHits++;
         StartCoroutine(startInvFrames());
         UpdateHealthBar();
         if (currentHits >= maxHealth)
@@ -36,7 +37,7 @@ public class Health : MonoBehaviour
     public void RecoverHealth(int amount)
     {
         currentHits -= amount;
-        if(currentHits <=0) //prevent negative hit mark
+        if (currentHits <= 0) //prevent negative hit mark
         {
             currentHits = 0;
         }
@@ -58,7 +59,7 @@ public class Health : MonoBehaviour
     }
 
     public IEnumerator startInvFrames()
-    {   
+    {
         isInvincible = true;
         yield return new WaitForSeconds(invulnerabilityFrames);
         isInvincible = false;

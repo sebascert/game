@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 
 public class bulletFire : MonoBehaviour
 {
-    enum SpawnerType { Straight, Spin, Burst}
+    enum SpawnerType { Straight, Spin, Burst }
 
     [Header("Bullet Attributes")]
     public GameObject bullet;
@@ -21,7 +22,7 @@ public class bulletFire : MonoBehaviour
     [SerializeField] private float startingDistance;
     [SerializeField] private float burstTime = 0.1f;
     [SerializeField] private bool stagger;
-    
+
     private GameObject spawnedBullet;
     private float timer = 0f;
     private bool isShooting = false;
@@ -38,7 +39,7 @@ public class bulletFire : MonoBehaviour
                 StartCoroutine(BurstFire());
             else
                 Fire();
-            
+
             timer = 0;
         }
     }
@@ -47,8 +48,8 @@ public class bulletFire : MonoBehaviour
     {
         if (bullet)
         {
-            Quaternion bulletRotation = transform.rotation; 
-            Vector2 direction = transform.right;            
+            Quaternion bulletRotation = transform.rotation;
+            Vector2 direction = transform.right;
 
             if (spawnerType == SpawnerType.Burst || spawnerType == SpawnerType.Straight)
             {
@@ -83,7 +84,7 @@ public class bulletFire : MonoBehaviour
     {
         GameObject player = GameObject.FindWithTag("Player");
         if (player == null) yield break;
-        
+
         isShooting = true;
 
         Vector2 toPlayer = player.transform.position - transform.position;
@@ -93,14 +94,16 @@ public class bulletFire : MonoBehaviour
         float angleStep = 0f;
         float startAngle = targetAngle;
 
-        if(angleSpread != 0){
+        if (angleSpread != 0)
+        {
             angleStep = angleSpread / (projectilesPerBurst - 1);
             startAngle = targetAngle - angleSpread / 2f;
             currentAngle = startAngle;
         }
 
         float timeBetweenProjectiles = 0f;
-        if (stagger){
+        if (stagger)
+        {
             timeBetweenProjectiles = burstTime / projectilesPerBurst;
         }
 
@@ -114,7 +117,8 @@ public class bulletFire : MonoBehaviour
                 Fire(direction, spawnPos);
                 currentAngle += angleStep;
 
-                if (stagger){
+                if (stagger)
+                {
                     yield return new WaitForSeconds(timeBetweenProjectiles);
                 }
             }
@@ -129,7 +133,7 @@ public class bulletFire : MonoBehaviour
     {
         float x = transform.position.x + startingDistance * Mathf.Cos(currentAngle * Mathf.Deg2Rad);
         float y = transform.position.y + startingDistance * Mathf.Sin(currentAngle * Mathf.Deg2Rad);
-        Vector2 pos = new Vector2(x,y);
+        Vector2 pos = new Vector2(x, y);
 
         return pos;
     }

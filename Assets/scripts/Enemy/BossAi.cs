@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections;
+
+using UnityEngine;
 
 public class BossAi : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class BossAi : MonoBehaviour
 
     private IEnumerator AttackCycle()
     {
-        while(true)
+        while (true)
         {
             int randomValue = Random.Range(0, 3);
             GameObject selectedAttack = null;
@@ -28,7 +29,7 @@ public class BossAi : MonoBehaviour
             float xOffset = 0f;
             float yOffset = 0f;
 
-            switch(randomValue)
+            switch (randomValue)
             {
                 case 0:
                     selectedAttack = staggerAttack;
@@ -44,10 +45,10 @@ public class BossAi : MonoBehaviour
                     selectedAttack = waveAttack;
                     xOffset = 1.5f;
                     yOffset = 3f;
-                    break;    
+                    break;
             }
 
-            if(selectedAttack != null)
+            if (selectedAttack != null)
             {
                 Vector3 leftPos = transform.position + new Vector3(-xOffset, yOffset, 0);
                 Vector3 rightPos = transform.position + new Vector3(xOffset, yOffset, 0);

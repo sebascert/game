@@ -6,13 +6,13 @@ using UnityEngine.Serialization;
 public class DungeonDoor : MonoBehaviour
 {
     private enum EnterSide { Top, Bottom, Left, Right }
-    
+
     [SerializeField]
     private EnterSide enterSide;
-    
+
     [HideInInspector]
     public DungeonController controller;
-    
+
     private Collider2D collider;
     private SpriteRenderer SR;
 
@@ -21,11 +21,11 @@ public class DungeonDoor : MonoBehaviour
         collider = GetComponent<Collider2D>();
         if (!controller)
             Debug.LogError("missing reference to DungeonController");
-        
+
         SR = GetComponent<SpriteRenderer>();
         if (!SR)
             Debug.LogError("missing reference to SpriteREnderer");
-        
+
         collider.isTrigger = true;
         SR.enabled = false;
     }
@@ -34,7 +34,7 @@ public class DungeonDoor : MonoBehaviour
     {
         if (!other.CompareTag("Player"))
             return;
-        
+
         Vector3 playerPos = other.transform.position;
         switch (enterSide)
         {

@@ -1,5 +1,7 @@
-using UnityEditor.Rendering.LookDev;
 using System.Collections;
+
+using UnityEditor.Rendering.LookDev;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,11 +12,11 @@ public class Movement : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 moveInput;
 
-    [Header ("Movement")]
+    [Header("Movement")]
     public float speed = 5f;
     public float currentSpeed;
 
-    [Header ("Dashing")]
+    [Header("Dashing")]
     public float dashSpeed = 7f;
     public float dashTime = .2f;
     public float cooldown = .1f;
@@ -24,7 +26,7 @@ public class Movement : MonoBehaviour
     private bool canDash = true;
     private Vector2 dashDir;
 
-    public bool isDashing => _isDashing;   
+    public bool isDashing => _isDashing;
 
     void Start()
     {

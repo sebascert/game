@@ -1,6 +1,7 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+
+using UnityEngine;
 
 public class NoteObject : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class NoteObject : MonoBehaviour
             canBePressed = false;
             MinigameManager.Instance.NoteMissed(transform.position);
         }
-        if(!hasBeenHit && Input.GetKeyDown(keyToPress) && canBePressed)
+        if (!hasBeenHit && Input.GetKeyDown(keyToPress) && canBePressed)
         {
             hasBeenHit = true;
             gameObject.SetActive(false);

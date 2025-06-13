@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections;
+
+using UnityEngine;
 
 public class deployAttackInstrument : MonoBehaviour
 {
@@ -20,24 +21,25 @@ public class deployAttackInstrument : MonoBehaviour
     private void SpawnInstrument()
     {
         if (playerTransform != null && currentInstrument == null)
-        {   
+        {
             Vector2 randomOffset = Random.insideUnitCircle * spawnRadius;
             Vector2 spawnPosition = (Vector2)playerTransform.position + randomOffset;
 
             currentInstrument = Instantiate(attackInstrumentPrefab, spawnPosition, Quaternion.identity);
 
             attackInstrument instrumentScript = currentInstrument.GetComponent<attackInstrument>();
-            instrumentScript.deployScript = this;  
+            instrumentScript.deployScript = this;
 
             spawned = true;
-        } 
+        }
     }
 
     //Coroutine
     IEnumerator SpawnLoop()
     {
-        while(true){ 
-            if(!spawned && DungeonController.onCombat)
+        while (true)
+        {
+            if (!spawned && DungeonController.onCombat)
             {
                 SpawnInstrument();
                 spawned = true;

@@ -1,6 +1,7 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -31,20 +32,20 @@ class MinigameManager : MonoBehaviourSingleton<MinigameManager>
     void Start()
     {
         notesPressed = 0f;
-        startPlaying = true;         
-        StartCoroutine(StartAfterDelay());  
+        startPlaying = true;
+        StartCoroutine(StartAfterDelay());
     }
 
     void Update()
     {
-        if(startPlaying && musicStarted && !music.isPlaying)
-            ExitMinigame(); 
+        if (startPlaying && musicStarted && !music.isPlaying)
+            ExitMinigame();
     }
 
     public void NoteHit(Vector3 position)
     {
         currentCombo += .5f;
-        
+
         float distance = Mathf.Abs(position.y);
         if (distance < 0.08f)
         {
@@ -59,7 +60,7 @@ class MinigameManager : MonoBehaviourSingleton<MinigameManager>
         {
             NomralHit(position);
         }
-        
+
         scoreText.text = "Score: " + currentScore;
         comboText.text = "Combo: " + currentCombo.ToString("F1");
 
@@ -105,7 +106,7 @@ class MinigameManager : MonoBehaviourSingleton<MinigameManager>
         Time.timeScale = 1;
         float accuracy = Mathf.Clamp01(notesPressed / totalNotes);
         float damage = currentCombo * accuracy; //currentCombo * (totalNotes / notesPressed);
-        float baseDamage = (currentScore)/1000;
+        float baseDamage = (currentScore) / 1000;
         MinigameResult.totalDamage = damage * baseDamage;
 
         SceneManager.UnloadSceneAsync("Minigame");

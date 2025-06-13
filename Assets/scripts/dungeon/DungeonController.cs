@@ -13,18 +13,18 @@ public class DungeonController : MonoBehaviour
 {
     [SerializeField]
     private List<DungeonDoor> dungeonDoors;
-    
+
     [SerializeField]
     private List<EnemySpawner> spawners;
-    
+
     public UnityEvent onClearDungeon;
     public UnityEvent onStartDungeon;
-    
+
     // must be a single cinemachine virtual cam
     private CinemachineConfiner2D cameraConfiner;
     private PolygonCollider2D dungeonConfiner;
 
-    [SerializeField] 
+    [SerializeField]
     private bool cleared;
     [SerializeField]
     public static bool onCombat { get; private set; }
@@ -37,19 +37,19 @@ public class DungeonController : MonoBehaviour
     {
         cleared = false;
         onCombat = false;
-        
+
         onStartDungeon.AddListener(() =>
         {
             if (cleared)
                 return;
             StartCoroutine(EnterDungeon());
         });
-        
+
         if (dungeonDoors.Count == 0)
             Debug.LogError("dungeon with no doors ");
         if (spawners.Count == 0)
             Debug.LogError("dungeon with no enemie spawners");
-        
+
         dungeonDoors.ForEach((door) => door.controller = this);
     }
 
@@ -58,7 +58,7 @@ public class DungeonController : MonoBehaviour
         cameraConfiner = FindFirstObjectByType<CinemachineConfiner2D>();
         if (!cameraConfiner)
             Debug.LogError("no CinemachineConfiner2D found");
-        dungeonConfiner= GetComponent<PolygonCollider2D>();
+        dungeonConfiner = GetComponent<PolygonCollider2D>();
         if (!dungeonConfiner)
             Debug.LogError("no dungeon confiner found");
     }
@@ -67,17 +67,17 @@ public class DungeonController : MonoBehaviour
     {
         dungeonDoors.ForEach((door) => door.Close());
         onCombat = true;
-        
+
         cameraConfiner.BoundingShape2D = dungeonConfiner;
-        
+
         completedSpawners = 0;
-        
+
         Vector2 pos = new Vector2(transform.position.x, transform.position.y);
         spawners.ForEach((spawner) => StartCoroutine(spawner.StartSpawner(pos, this)));
 
         yield return new WaitUntil(() => completedSpawners == spawners.Count);
         yield return new WaitUntil(() => enemies.TrueForAll((enemy) => !enemy));
-        
+
         enemies.Clear();
         onClearDungeon.Invoke();
         cameraConfiner.BoundingShape2D = null;

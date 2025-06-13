@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections;
+
+using UnityEngine;
 
 public class RecoveryItem : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class RecoveryItem : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             collision.GetComponent<Health>().RecoverHealth(healthToRecover);
             Destroy(gameObject);

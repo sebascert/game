@@ -1,6 +1,7 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+
+using UnityEngine;
 
 public class ButtonController : MonoBehaviour
 {
@@ -12,17 +13,17 @@ public class ButtonController : MonoBehaviour
 
     void Start()
     {
-        SR = GetComponent<SpriteRenderer>();   
+        SR = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(keyToPress))
+        if (Input.GetKeyDown(keyToPress))
         {
             SR.sprite = pressedImage;
         }
-        if(Input.GetKeyUp(keyToPress))
+        if (Input.GetKeyUp(keyToPress))
         {
             SR.sprite = defaultImage;
         }

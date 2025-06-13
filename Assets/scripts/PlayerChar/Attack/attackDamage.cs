@@ -1,12 +1,13 @@
-using UnityEngine;
 using System.Collections;
+
+using UnityEngine;
 
 public class AttackDamage : MonoBehaviour
 {
     private float damageAmount;
     [SerializeField] private float despawnTime = 1f;
     [SerializeField] private float scaleGrowthTime = .01f;
-    [SerializeField] private float x,y;
+    [SerializeField] private float x, y;
     private Vector3 scaleGrowth;
 
     void Start()
@@ -28,7 +29,7 @@ public class AttackDamage : MonoBehaviour
             EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
             if (enemyHealth != null)
             {
-                enemyHealth.TakeDamage(damageAmount);  
+                enemyHealth.TakeDamage(damageAmount);
             }
         }
     }
@@ -40,7 +41,7 @@ public class AttackDamage : MonoBehaviour
 
     private IEnumerator growScale()
     {
-        while(true)
+        while (true)
         {
             yield return new WaitForSeconds(scaleGrowthTime);
             transform.localScale += scaleGrowth;

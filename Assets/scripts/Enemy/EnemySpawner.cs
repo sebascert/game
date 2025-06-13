@@ -1,7 +1,7 @@
 using System;
+using System.Collections;
 
 using UnityEngine;
-using System.Collections;
 
 [Serializable]
 public class EnemySpawner : MonoBehaviour
@@ -19,21 +19,21 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
-        if (!prefab) 
+        if (!prefab)
             Debug.LogError("missing enemy prefab");
     }
 
     public IEnumerator StartSpawner(Vector3 position, DungeonController dungeon)
     {
         yield return new WaitForSeconds(startDelay);
-        
+
         for (int i = 0; i < count; i++)
         {
             Vector2 randomOffset = UnityEngine.Random.insideUnitCircle * spawnRadius;
             Vector2 spawnPosition = (Vector2)position + randomOffset;
             GameObject enemy = Instantiate(prefab, spawnPosition, Quaternion.identity);
             dungeon.enemies.Add(enemy);
-            
+
             if (i < count - 1)
                 break;
             yield return new WaitForSeconds(delay);
@@ -41,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
 
         dungeon.completedSpawners++;
     }
-    
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
